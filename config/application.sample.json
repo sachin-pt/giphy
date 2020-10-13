@@ -1,0 +1,17 @@
+{
+  "common": {
+  },
+  "client": {
+    "endPoints": {
+      "gql": "http://localhost:4001/api/gql"
+    }
+  },
+  "server": {
+    "endPoints": {
+      "gql": "http://localhost:4001/api/gql",
+      "giphy": "https://api.giphy.com/"
+    },
+    "giphyApiKey": "Gc7131jiJuvI7IdN0HZ1D7nh0ow5BU6g"
+  },
+  "setup": "development"
+}
