@@ -7,6 +7,7 @@ const TRENDING_QUERY = gql`
       results {
         aspectRatio
         url
+        still
       }
       nextOffset
     }
@@ -19,6 +20,7 @@ const SEARCH_QUERY = gql`
       results {
         aspectRatio
         url
+        still
       }
       nextOffset
     }
@@ -30,7 +32,7 @@ export const useGiphy = ({type, query}) => {
     query ? SEARCH_QUERY : TRENDING_QUERY,
     {
       variables: {
-        limit: 10,
+        limit: 25,
         offset: 0,
         type,
         query

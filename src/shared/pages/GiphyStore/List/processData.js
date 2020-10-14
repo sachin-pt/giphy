@@ -1,9 +1,9 @@
 const CONTAINER_WIDTH = 1024
-const ITEMS_PER_ROW = 3
+const ITEMS_PER_ROW = 4
 const ITEM_WIDTH = Math.floor(CONTAINER_WIDTH / ITEMS_PER_ROW)
 export const processData = (list) => {
-  let minTops = [0, 0, 0]
-  const processedData = list.map(({aspectRatio, url}) => {
+  let minTops = [...new Array(ITEMS_PER_ROW)].map(() => 0)
+  const processedData = list.map(({aspectRatio, url, still}) => {
     const height = Math.floor(aspectRatio * ITEM_WIDTH)
     const top = Math.min(...minTops)
     const minTopIndex = minTops.indexOf(top)
@@ -11,6 +11,7 @@ export const processData = (list) => {
     minTops[minTopIndex] = top + height
     return {
       url,
+      still,
       width: ITEM_WIDTH,
       height,
       top,

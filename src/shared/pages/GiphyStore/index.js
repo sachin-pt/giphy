@@ -3,7 +3,7 @@ import {useParams} from 'react-router-dom'
 import { ThemeProvider } from 'emotion-theming'
 import themes from 'shared/styles/constants/theme'
 import { useGiphy } from 'shared/pages/GiphyStore/useGiphy'
-import {containerStyle} from 'shared/pages/GiphyStore/style'
+import {containerStyle, GlobalStyles} from 'shared/pages/GiphyStore/style'
 import {TYPES} from 'shared/constants/giphyTypes'
 import Header from 'shared/pages/GiphyStore/Header'
 import List from 'shared/pages/GiphyStore/List'
@@ -32,6 +32,7 @@ const GiphyStore = () => {
         <Header setTheme={setTheme} theme={theme} query={query} type={type} />
         {content}
       </div>
+      <GlobalStyles />
     </ThemeProvider>
   )
 }

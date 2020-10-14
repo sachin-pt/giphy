@@ -4,7 +4,6 @@ import Html from 'server/components/HTML'
 import { StaticRouter as Router } from 'react-router-dom'
 import jsec from 'jsesc'
 import { createStore, Provider } from 'shared/store'
-import {getDataFromTree} from '@apollo/client/react/ssr'
 const getFooter = (template, state, script) => {
   const initialState = JSON.stringify(state).replace(/</g, '\\u003c')
   return template

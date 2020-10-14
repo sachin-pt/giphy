@@ -1,26 +1,27 @@
-import React from 'react'
-import {itemStyle} from 'shared/pages/GiphyStore/ListItem/style'
+import React, {useState} from 'react'
+import {itemStyle, btnStyle} from 'shared/pages/GiphyStore/ListItem/style'
 
 const ListItem = ({data}) => {
-  const {url, top, left, height, width} = data
+  const {url, top, left, height, width, still} = data
+  const [play, setPlay] = useState(false)
+  const displayUrl = play ? url : still
+  let content = <div />
   if (url) {
-    return (
-      <div css={itemStyle}  style={{
-        height: `${height}px`,
-        width: `${width}px`,
-        top: `${top}px`,
-        left: `${left}px`
-      }}><img src={url} loading='lazy'  />
-      </div>
+    content = (
+      <>
+        <img src={displayUrl} loading='lazy' />
+        <span onClick={() => setPlay(!play)} css={btnStyle(play)} />
+      </>
     )
   }
   return (
-    <div css={itemStyle} loading='lazy' style={{
+    <div css={itemStyle} style={{
       height: `${height}px`,
       width: `${width}px`,
       top: `${top}px`,
       left: `${left}px`
-    }}><div  />
+    }}>
+      {content}
     </div>
   )
 }
