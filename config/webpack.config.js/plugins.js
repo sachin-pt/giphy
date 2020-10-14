@@ -2,8 +2,6 @@ const webpack = require('webpack')
 const LoadablePlugin = require('@loadable/webpack-plugin')
 const { UnusedFilesWebpackPlugin } = require('unused-files-webpack-plugin')
 const WriteFileWebpackPlugin = require('write-file-webpack-plugin')
-const BrotliGzipPlugin = require('brotli-gzip-webpack-plugin')
-const ImageminWebpWebpackPlugin = require('imagemin-webp-webpack-plugin')
 const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin
 const path = require('path')
 const paths = require('../paths')
@@ -39,17 +37,10 @@ const server = [
     __BUILD_TYPE__: JSON.stringify(process.env.BUILD_TYPE || 'm'),
     __BUILD_ENV__: JSON.stringify(process.env.BUILD_ENV || 'beta')
   }),
-  new webpack.BannerPlugin(bannerOptions),
+  new webpack.BannerPlugin(bannerOptions)
 ]
 
 const commonClientProdPlugins = (type) => [
-  new BrotliGzipPlugin({
-    asset: '[path].br[query]',
-    algorithm: 'brotli',
-    test: new RegExp(`.(${type}.js|(css|html|svg|ttf|woff|json))$`),
-    threshold: 1024,
-    minRatio: 0.9
-  }),
   ...(type === 'm'
     ? [
       new UnusedFilesWebpackPlugin({
@@ -68,18 +59,6 @@ const commonClientProdPlugins = (type) => [
           ]
         }
       }),
-      new ImageminWebpWebpackPlugin({
-        config: [
-          {
-            test: /\.(jpe?g|png)/,
-            options: {
-              quality: 82
-            }
-          }
-        ],
-        overrideExtension: false,
-        strict: false
-      }),
       new BundleAnalyzerPlugin({
         analyzerMode: 'static',
         openAnalyzer: false,
@@ -87,15 +66,7 @@ const commonClientProdPlugins = (type) => [
         reportFilename: reportPath(type)
       })
     ]
-    : [
-      new BrotliGzipPlugin({
-        asset: '[path].gz[query]',
-        algorithm: 'gzip',
-        test: new RegExp(`.(${type}.js|(css|html|svg|ttf|woff|json))$`),
-        threshold: 1024,
-        minRatio: 0.9
-      })
-    ])
+    : [])
 ]
 
 const clientDevPlugins = (type = 'l') => [
