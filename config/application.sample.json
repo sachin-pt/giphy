@@ -8,7 +8,7 @@
   },
   "server": {
     "endPoints": {
-      "gql": "https://giphy-store.herokuapp.com/api/gql",
+      "gql": "http://localhost:4001/api/gql",
       "giphy": "https://api.giphy.com/"
     },
     "giphyApiKey": "Gc7131jiJuvI7IdN0HZ1D7nh0ow5BU6g"
