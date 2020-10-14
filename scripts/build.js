@@ -1,4 +1,5 @@
 const rimraf = require('rimraf')
+require('./config')
 const paths = require('../config/paths')
 const { logMessage } = require('./utils')
 const run = require('parallel-webpack').run
