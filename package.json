@@ -10,7 +10,7 @@
   },
   "scripts": {
     "modules": "yarn",
-    "prestart": "yarn && node config",
+    "prestart:local": "yarn && node config",
     "config": "NODE_ENV=production node config",
     "prestart:debug": "yarn && node config",
     "lint-staged": "./node_modules/.bin/lint-staged",
