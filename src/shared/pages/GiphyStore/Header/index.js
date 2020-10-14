@@ -14,11 +14,13 @@ const Header = ({setTheme, theme, query, type}) => {
   const onChange = e => {
     const val = e.target.value || ''
     setQuery(val)
-    const path = `/${type}/${val ? val : ''}`
+    const query = new URLSearchParams({type, query: val})
+    const path = `/?${query.toString()}`
     debouncedPush(path)
   }
   const changeType = (type) => {
-    const path = `/${type}/${query ? query : ''}`
+    const qry = new URLSearchParams({type, query: query || ''})
+    const path = `/?${qry.toString()}`
     getHistory().push(path)
   }
   return (

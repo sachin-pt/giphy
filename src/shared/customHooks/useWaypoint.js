@@ -1,6 +1,6 @@
-import React, {useRef, useCallback, useEffect} from 'react'
+import {useRef, useCallback, useEffect} from 'react'
 
-export default ({children = 'Loading...', onChange}) => {
+export const useWaypoint = (onChange) => {
   const loadMoreFunction = useRef({ fn: () => {} })
   const loadMoreRef = useRef(null)
 
@@ -8,7 +8,6 @@ export default ({children = 'Loading...', onChange}) => {
     const [{isIntersecting}] = entry || []
     if (isIntersecting) {
       loadMoreFunction.current.fn && loadMoreFunction.current.fn()
-
     }
   }, [])
 
@@ -25,17 +24,12 @@ export default ({children = 'Loading...', onChange}) => {
         threshold: [0.1]
       }
 
-      let observer = new IntersectionObserver(observeCallback, options)
+      let observer = new window.IntersectionObserver(observeCallback, options)
       observer.observe(loadMoreRef.current)
       return () => {
         loadMoreRef && loadMoreRef.current && observer.unobserve(loadMoreRef.current)
       }
     }
   }, [loadMoreRef])
-
-  return (
-    <span ref={loadMoreRef}>
-      {children}
-    </span>
-  )
+  return loadMoreRef
 }

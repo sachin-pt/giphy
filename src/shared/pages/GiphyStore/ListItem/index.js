@@ -1,7 +1,7 @@
 import React, {useState} from 'react'
 import {itemStyle, btnStyle} from 'shared/pages/GiphyStore/ListItem/style'
 
-const ListItem = ({data}) => {
+const ListItem = ({data, children}) => {
   const {url, top, left, height, width, still} = data
   const [play, setPlay] = useState(false)
   const displayUrl = play ? url : still
@@ -15,13 +15,14 @@ const ListItem = ({data}) => {
     )
   }
   return (
-    <div css={itemStyle} style={{
+    <div
+      css={itemStyle} style={{
       height: `${height}px`,
       width: `${width}px`,
       top: `${top}px`,
       left: `${left}px`
     }}>
-      {content}
+      {children || content}
     </div>
   )
 }

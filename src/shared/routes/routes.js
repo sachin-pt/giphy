@@ -14,6 +14,5 @@ const storeRoute = (path) => ({
 
 
 export default () => [
-  storeRoute('/:type/:query'),
   storeRoute()
 ]
