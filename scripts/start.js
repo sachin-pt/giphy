@@ -1,9 +1,6 @@
 const path = require('path')
 
-const { logMessage, compilerPromise, getLocalIP } = require('./utils')
-if (process.env.LOCAL_IP) {
-  process.env.LOCAL_IP = getLocalIP()
-}
+const { logMessage, compilerPromise } = require('./utils')
 
 const webpack = require('webpack')
 const rimraf = require('rimraf')
@@ -29,17 +26,11 @@ const start = async () => {
 
   const publicPath = clientConfig.output.publicPath
 
-  clientConfig.output.publicPath = [
-    `http://${process.env.LOCAL_IP || 'localhost'}:${WEBPACK_PORT}`,
-    publicPath
-  ]
+  clientConfig.output.publicPath = [`http://localhost:${WEBPACK_PORT}`, publicPath]
     .join('/')
     .replace(/([^:+])\/+/g, '$1/')
 
-  serverConfig.output.publicPath = [
-    `http://${process.env.LOCAL_IP || 'localhost'}:${WEBPACK_PORT}`,
-    publicPath
-  ]
+  serverConfig.output.publicPath = [`http://localhost:${WEBPACK_PORT}`, publicPath]
     .join('/')
     .replace(/([^:+])\/+/g, '$1/')
 

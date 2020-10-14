@@ -28,12 +28,10 @@ const paths = {
   loadableClientStatsFile: (type = 'l') => resolveApp(`build/client/s/${type}-stats.json`),
   loadableServerStatsFile: resolveApp('build/server/loadable-stats.json'),
   publicPath: '/s/',
-  prodPublicPath: process.env.LOCAL_IP
-    ? `http://${process.env.LOCAL_IP}:8501/s/`
-    : (config.server.cdnEndpoint
-      ? [config.server.cdnEndpoint || '', '/s/'].join('/')
-      : '/s/'
-    ).replace(/([^:+])\/+/g, '$1/'),
+  prodPublicPath: (config.server.cdnEndpoint
+    ? [config.server.cdnEndpoint || '', '/s/'].join('/')
+    : '/s/'
+  ).replace(/([^:+])\/+/g, '$1/')
 }
 
 paths.resolveModules = [

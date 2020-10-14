@@ -16,8 +16,11 @@
     "lint-staged": "./node_modules/.bin/lint-staged",
     "lint:js": "node ./node_modules/standard --fix ./**/*.js",
     "precommit": "lint-staged",
+    "build": "NODE_ENV=production node scripts/build.js",
     "start": "NODE_ENV=development node --harmony scripts/start.js",
-    "start:debug": "NODE_ENV=development DEBUG_MODE=true node --harmony scripts/start.js"
+    "start:debug": "NODE_ENV=development DEBUG_MODE=true node --harmony scripts/start.js",
+    "clean": "rm -rf build && rm -rf node_modules && rm -rf src/config/appConfig.json",
+    "build:prod": "npm run clean && npm run modules && npm run config && npm run build"
   },
   "lint-staged": {
     "*.js": [
