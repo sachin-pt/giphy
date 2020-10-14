@@ -3,6 +3,7 @@ import { renderToStaticMarkup, renderToString } from 'react-dom/server'
 import Html from 'server/components/HTML'
 import { StaticRouter as Router } from 'react-router-dom'
 import jsec from 'jsesc'
+import {getDataFromTree} from '@apollo/client/react/ssr'
 import { createStore, Provider } from 'shared/store'
 const getFooter = (template, state, script) => {
   const initialState = JSON.stringify(state).replace(/</g, '\\u003c')
@@ -33,7 +34,7 @@ const render = async (
   try {
     let markup = ''
       try {
-        // await getDataFromTree(appContainer)
+        await getDataFromTree(appContainer)
         markup = renderToString(appContainer)
       } catch (e) {
         console.log(e)

@@ -1,6 +1,6 @@
 import { loadableReady } from '@loadable/component'
 import React from 'react'
-import { render } from 'react-dom'
+import { hydrate } from 'react-dom'
 import { Router } from 'react-router-dom'
 import App from 'shared/App'
 import cleanUrl from 'client/lib/cleanUrl'
@@ -16,7 +16,7 @@ function renderApp () {
   cleanUrl()
   const store = createStore(window.__INITIAL_STATE__)
 
-  render(
+  hydrate(
     <Provider store={store}>
       <Router history={getHistory()}>
         <App routes={routes()} />
